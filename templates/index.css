@@ -1,0 +1,29 @@
+#particles-js
+{
+    height: 100%;
+    background: #4f045e;
+}
+
+h1{
+    color: aliceblue;
+    text-align: center;
+}
+form{
+    width: 50%;
+	height: 100px;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+}
+
+input{
+    width: 80%;
+}
+
+.form-rounded {
+    border-radius: 12rem;
+    }
