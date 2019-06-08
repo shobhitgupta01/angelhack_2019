@@ -7,7 +7,8 @@
 
     <title>Topic Extraction</title>
 
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href = {{url_for('static',filename = 'css/for_index.css')}}>
+
     
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -21,7 +22,7 @@
                 
     <form action="">
         <div class="input-group">
-            <input type="url" class="form-rounded" placeholder="  Enter the URL">
+            <input type="url" class="form-rounded" name="url" placeholder="  Enter the URL">
         
         <div class="input-group-append">
             <button class="btn form-rounded" type="submit" style="margin-left: -50px;width: 50px;"><i class="fas fa-search"></i></button>
@@ -35,8 +36,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <!--For particles-->
-    <script type="text/javascript" src="particles.js"></script>
-    <script type="text/javascript" src="app.js"></script> 
+    <script type="text/javascript" src={{url_for('static',filename = "js/particles.js")}}></script>
+    <script type="text/javascript" src={{url_for('static',filename = "js/app.js")}}></script> 
 
     <!--Font Awesome-->
     <script src="https://kit.fontawesome.com/f50421dc36.js"></script>
