@@ -9,6 +9,7 @@
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Comment
+import json
 
 #--------------------------------------------------method description-----------------------------------------------------------
 #Name       : find_visible
@@ -63,7 +64,10 @@ def get_text(page_url):
     final_text = "".join(t.strip() for t in visible_texts)
     
     #returning the filtered texts
-    return "".join([i if ord(i) < 128 else ' ' for i in final_text])
+    my_data = "".join([i if ord(i) < 128 else ' ' for i in final_text])
 
+    data_object = {'text_output':my_data}
 
+    with open('./test_data/job_safe.json','w+') as f:
+        json.dump(data_object,f) 
  
