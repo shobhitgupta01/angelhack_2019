@@ -7,7 +7,9 @@
 h1{
     color: aliceblue;
     text-align: center;
+    
 }
+
 form{
     width: 50%;
 	height: 100px;
@@ -25,5 +27,5 @@ input{
 }
 
 .form-rounded {
-    border-radius: 12rem;
+    border-radius: 10rem;
     }
