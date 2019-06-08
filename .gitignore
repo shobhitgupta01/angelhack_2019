@@ -1,6 +1,5 @@
 *.zip
 example.ipynb
-*test*
 *checkpoints
 million*
 *.dot
