@@ -59,8 +59,11 @@ def get_text(page_url):
     #filtering texts
     visible_texts = filter(find_visible, texts)
 
-    #returning the filtered texts  
-    return " ".join(t.strip() for t in visible_texts)
+    #removing non-ascii characters  
+    final_text = "".join(t.strip() for t in visible_texts)
     
+    #returning the filtered texts
+    return "".join([i if ord(i) < 128 else ' ' for i in final_text])
+
 
  
