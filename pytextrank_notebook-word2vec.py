@@ -81,6 +81,9 @@ def get_text_data(url):
 
 @app.route('/topics', methods=['POST'])
 def get_topics():
+    print(request)
+    # print(request.text)
+    print(request.json)
     if not request.json or not 'url' in request.json:
         abort(400)
 
