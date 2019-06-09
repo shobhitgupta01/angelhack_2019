@@ -28,4 +28,4 @@ python3 pytextrank_notebook-word2vec.py
 ```bash
 python3 app.py
 ```
-4. Your app can be accessed on the url __10.2.89.90:2019__
+4. Your app can be accessed on the url __http://10.2.89.90:2019__
