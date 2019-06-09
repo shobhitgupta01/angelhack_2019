@@ -110,7 +110,7 @@ def get_topics():
             tmp = max(cosine_values)
             correlated_word = news_topics_list[cosine_values.index(tmp)]
 
-        result[correlated_word] = tmp
+        result[correlated_word] = round(tmp,2)
     #     result.append([news_topics_list[cosine_values.index(max(cosine_values))], max(cosine_values)])
 
     # return collections.OrderedDict(result)
