@@ -1,12 +1,12 @@
 #importing libraries
 from flask import Flask, jsonify, render_template, url_for, request
 from get_text import get_text
-from flask_googlecharts import GoogleCharts, BarChart, MaterialLineChart
-from flask_googlecharts.utils import prep_data
+import pandas as pd
+
 
 #initialization
 app = Flask(__name__)
-charts = GoogleCharts(app)
+
 
 
 @app.route("/")
@@ -16,28 +16,19 @@ def index():
 
 @app.route('/topics',methods = ['POST','GET'])
 def topics():
+    team_name="do_the_code"
+    
     if request.method == 'POST':
         result = request.form
     url = result['url']
     #page_text = get_text(url)
     print(url)
 
-
-    #making google chart
-    my_chart = BarChart("my_chart", options={'title': 'My Chart'})
-
     #data for chart
-    chart_data = [["technology",0.85],["maths",0.70],["war",0.6],['education',0.4],['candy',0.1]]
-
-    #adding data to chart
-    my_chart.add_column("Topic","Confidence Score")
-    my_chart.add_rows(chart_data)
-
-    #registering chart
-    charts.register(my_chart)
-
+    df = pd.DataFrame([['technology',0.85],['maths',0.70],['war',0.6],['education',0.4],['candy',0.1]],columns=["topic","score"])
+   
     #rendering the page
-    return render_template('results.html',result = url)
+    return render_template('results.html',df=df, titles=df.columns.values,team=team_name,url=url)
 
 
 if __name__ == "__main__":
