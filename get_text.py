@@ -66,8 +66,9 @@ def get_text(page_url):
     #returning the filtered texts
     my_data = "".join([i if ord(i) < 128 else ' ' for i in final_text])
 
-    data_object = {'text_output':my_data}
+    return my_data
+    # data_object = {'text_output':my_data}
 
-    with open('./test_data/job_safe.json','w+') as f:
-        json.dump(data_object,f) 
+    # with open('./test_data/job_safe.json','w+') as f:
+    #     json.dump(data_object,f) 
  
