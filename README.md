@@ -30,7 +30,7 @@ python3 app.py
 ```
 4. Your app can be accessed on the url __http://\<HOST-IP>\:2019__
 
-## Machine Learning Approach
+## Single Document Topic Modelling Approach
 
 ![Process Flow](https://github.com/shobhitgupta01/angelhack_2019/blob/master/flow_diagram.png)
 
