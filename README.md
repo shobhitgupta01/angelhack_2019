@@ -29,3 +29,8 @@ python3 pytextrank_notebook-word2vec.py
 python3 app.py
 ```
 4. Your app can be accessed on the url __http://\<HOST-IP>\:2019__
+
+## Machine Learning Approach
+
+![Process Flow](https://github.com/shobhitgupta01/angelhack_2019/blob/master/flow_diagram.png)
+
