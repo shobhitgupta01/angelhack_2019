@@ -12,7 +12,7 @@ Please have the following setup ready before running the notebook :
 * python 3.6.x
 * Flask   ==  0.12.2
 * pandas  ==  0.22.0
-* pytext  ==  1.1.0
+* pytextrank  ==  1.1.0
 * sklearn ==  0.21.2
 * spacy   ==  2.1.4
 * urllib  ==  1.25.3
