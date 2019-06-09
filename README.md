@@ -32,5 +32,5 @@ python3 app.py
 
 ## Single Document Topic Modelling Approach
 
-![Process Flow](https://github.com/shobhitgupta01/angelhack_2019/blob/master/flow_diagram.png)
+![Process Flow](https://github.com/shobhitgupta01/angelhack_2019/blob/master/flow_diagram2.png)
 
