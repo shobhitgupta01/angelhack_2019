@@ -12,26 +12,28 @@ from numpy.linalg import norm
 from sklearn.metrics.pairwise import cosine_similarity
 from urllib.request import urlopen
 import json
+
 nlp = spacy.load('en_core_web_md')
 from flask import Flask, jsonify
 from flask import request
 from flask import make_response
 from flask import abort
-import collections
+
 app = Flask(__name__)
 
-
-## Read the file containing the braud categories of news topics ~ 400 topics
+# Read the file containing the braud categories of news topics ~ 400 topics
 news_topics = pd.read_csv("list_of_topics_filtered.csv")
 print("No of topics considered {}".format(len(news_topics)))
 news_topics_list = news_topics.topics
 vectors = np.array(list(map(lambda x: nlp(x).vector, news_topics_list)))
-
 text_file_path = './test_data/sample.json'
 
+
+# Default route to check if the service is up
 @app.route('/')
 def index():
     return "I am up! I am up!"
+
 
 # Function which returns the key terms in a document
 def get_key_terms(text_doc):
@@ -41,20 +43,23 @@ def get_key_terms(text_doc):
             f.write("%s\n" % pytextrank.pretty_print(graf._asdict()))
 
     graph, ranks = pytextrank.text_rank(path_stage1)
-    pytextrank.render_ranks(graph, ranks)
+    # pytextrank.render_ranks(graph, ranks)
 
     result = []
     count = 0;
+    count_end = int(len(ranks)*0.2)
     for rl in pytextrank.normalize_key_phrases(path_stage1, ranks):
         count += 1
+        # if count>count_end and count>40: break
         result.append(ast.literal_eval(pytextrank.pretty_print(rl))[:2])
-        
+
     return result
 
 
 @app.errorhandler(404)
-def not_found(error):
+def not_found():
     return make_response(jsonify({'error': 'Not found'}), 404)
+
 
 # Extract text data from the provided URL
 def get_text_data(url):
@@ -83,9 +88,9 @@ def get_topics():
     key_terms = get_key_terms(text_file_path)
 
     word_vectors = list(map(lambda x: nlp(x[0]).vector, key_terms))
-    NUM_CLUSTERS=5
-    kmeans = cluster.KMeans(n_clusters=NUM_CLUSTERS, n_jobs=6, n_init=10, max_iter=500,
-                           random_state=0)
+    NUM_CLUSTERS = 5
+    kmeans = cluster.KMeans(n_clusters=NUM_CLUSTERS, n_jobs=1, n_init=10, max_iter=300,
+                            random_state=0)
     kmeans.fit(word_vectors)
 
     labels = kmeans.labels_
@@ -94,18 +99,23 @@ def get_topics():
     result = {}
 
     for x in centroids:
-        cosine_values = list(cosine_similarity(x.reshape(1,-1), vectors)[0])
-        correlated_word = news_topics_list[cosine_values.index(max(cosine_values))]
-        cosine_values[cosine_values.index(max(cosine_values))] = -1
+        cosine_values = list(cosine_similarity(x.reshape(1, -1), vectors)[0])
+        tmp = max(cosine_values)
+        correlated_word = news_topics_list[cosine_values.index(tmp)]
         while correlated_word in result:
-            correlated_word = news_topics_list[cosine_values.index(max(cosine_values))]
+            cosine_values[cosine_values.index(tmp)] = -1
+            tmp = max(cosine_values)
+            correlated_word = news_topics_list[cosine_values.index(tmp)]
 
-        result[correlated_word] = max(cosine_values)
+        result[correlated_word] = tmp
     #     result.append([news_topics_list[cosine_values.index(max(cosine_values))], max(cosine_values)])
 
     # return collections.OrderedDict(result)
-    return jsonify(sorted(result.items(), key = lambda kv: -kv[1]))
+    return jsonify(sorted(result.items(), key=lambda kv: -kv[1]))
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
+
 # print(get_topics("https://www.dawn.com/news/1486778"))
+#https://www.who.int/denguecontrol/disease/en/
